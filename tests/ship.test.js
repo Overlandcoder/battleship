@@ -14,3 +14,17 @@ test("ship is not sunk upon creation", () => {
   const testShip = new Ship(4);
   expect(testShip.isSunk).toBe(false);
 });
+
+test("hit() method increases hits by 1", () => {
+  const testShip = new Ship(4);
+  expect(testShip.hits).toBe(0);
+  testShip.hit();
+  expect(testShip.hits).toBe(1);
+});
+
+test("ship can receive multiple hits", () => {
+  const testShip = new Ship(4);
+  testShip.hit();
+  testShip.hit();
+  expect(testShip.hits).toBe(2);
+});
