@@ -1,3 +1,9 @@
-const greeting = () => "Hello";
+class Ship {
+  constructor(length) {
+    this.length = length;
+    this.hits = 0;
+    this.isSunk = false;
+  }
+}
 
-export { greeting };
+export default Ship;
