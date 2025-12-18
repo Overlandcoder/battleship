@@ -42,4 +42,18 @@ describe("ship placement", () => {
       expect(board.ships.length).toBe(0);
     });
   });
+
+  describe("ship cannot be placed out of bounds vertically", () => {
+    test("ship cannot be placed off the bottom edge", () => {
+      const board = new Gameboard();
+      board.placeShip(5, 0, 7, "vertical");
+      expect(board.ships.length).toBe(0);
+    });
+
+    test("ship cannot be placed off the top edge", () => {
+      const board = new Gameboard();
+      board.placeShip(5, 0, -1, "vertical");
+      expect(board.ships.length).toBe(0);
+    });
+  });
 });
