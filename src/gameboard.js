@@ -15,6 +15,8 @@ class Gameboard {
   }
 
   placeShip(length, x, y, direction = "horizontal") {
+    if (this.invalidCoords(length, x, y, direction)) return;
+
     const ship = new Ship(length);
     direction = direction.toLowerCase();
 
@@ -26,6 +28,12 @@ class Gameboard {
       }
     }
     this.#ships.push(ship);
+  }
+
+  invalidCoords(length, x, y, direction) {
+    if (direction === "horizontal") {
+      return (x < 0 || x + length > 9)
+    }
   }
 }
 
