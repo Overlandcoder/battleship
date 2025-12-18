@@ -14,13 +14,18 @@ class Gameboard {
     return this.#ships;
   }
 
-  placeShip(length, x, y) {
+  placeShip(length, x, y, direction = "horizontal") {
     const ship = new Ship(length);
-    this.#ships.push(ship);
+    direction = direction.toLowerCase();
 
     for (let i = 0; i < length; i++) {
-      this.#grid[y][x + i] = ship;
+      if (direction === "vertical") {
+        this.#grid[y + i][x] = ship;
+      } else {
+        this.#grid[y][x + i] = ship;
+      }
     }
+    this.#ships.push(ship);
   }
 }
 
