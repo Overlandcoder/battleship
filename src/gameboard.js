@@ -6,6 +6,7 @@ class Gameboard {
     .map(() => Array(10).fill(null));
   #ships = [];
 
+  // refactor later (don't expose whole grid, replace with getSquare method)
   get grid() {
     return this.#grid;
   }
@@ -15,7 +16,7 @@ class Gameboard {
   }
 
   placeShip(length, x, y, direction = "horizontal") {
-    dir = direction.toLowerCase();
+    const dir = direction.toLowerCase();
 
     if (!this.isValidDirection(dir)) return;
     if (!this.isWithinBounds(length, x, y, dir)) return;
@@ -51,6 +52,11 @@ class Gameboard {
 
   isSquareOccupied(x, y) {
     return this.grid[y][x] !== null;
+  }
+
+  receiveAttack(x, y) {
+    const ship = this.grid[y][x];
+    if (ship) ship.hit();
   }
 }
 
