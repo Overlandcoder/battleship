@@ -17,33 +17,40 @@ class Gameboard {
   placeShip(length, x, y, direction = "horizontal") {
     dir = direction.toLowerCase();
 
-    if (this.isDirectionInvalid(dir)) return;
-    if (this.invalidCoords(length, x, y, dir)) return;
-
-    const ship = new Ship(length);
+    if (!this.isValidDirection(dir)) return;
+    if (!this.isWithinBounds(length, x, y, dir)) return;
+    const coords = [];
 
     for (let i = 0; i < length; i++) {
-      if (dir === "vertical") {
-        this.#grid[y + i][x] = ship;
-      } else {
-        this.#grid[y][x + i] = ship;
-      }
+      dir === "vertical"
+        ? coords.push({ x: x, y: y + i })
+        : coords.push({ x: x + i, y: y });
     }
+
+    if (coords.some(({ x, y }) => this.isSquareOccupied(x, y))) return;
+    const ship = new Ship(length);
+    coords.forEach(({ x, y }) => (this.#grid[y][x] = ship));
     this.#ships.push(ship);
   }
 
-  invalidCoords(length, x, y, direction) {
-    if (x < 0 || y < 0 || x > 9 || y > 9) return true;
+  isWithinBounds(length, x, y, direction) {
+    const GRID_SIZE = 10;
+
+    if (x < 0 || y < 0 || x >= GRID_SIZE || y >= GRID_SIZE) return false;
 
     if (direction === "horizontal") {
-      return x + length > 9;
+      return x + length <= GRID_SIZE;
     } else if (direction === "vertical") {
-      return y + length > 9;
+      return y + length <= GRID_SIZE;
     }
   }
 
-  isDirectionInvalid(direction) {
-    return direction !== "horizontal" && direction !== "vertical";
+  isValidDirection(direction) {
+    return direction === "horizontal" || direction === "vertical";
+  }
+
+  isSquareOccupied(x, y) {
+    return this.grid[y][x] !== null;
   }
 }
 

@@ -32,7 +32,7 @@ describe("ship placement", () => {
   describe("ship cannot be placed out of bounds horizontally", () => {
     test("ship cannot be placed off the right edge", () => {
       const board = new Gameboard();
-      board.placeShip(5, 7, 0, "horizontal");
+      board.placeShip(5, 6, 0, "horizontal");
       expect(board.ships.length).toBe(0);
     });
 
@@ -54,6 +54,24 @@ describe("ship placement", () => {
       const board = new Gameboard();
       board.placeShip(5, 0, -1, "vertical");
       expect(board.ships.length).toBe(0);
+    });
+  });
+
+  describe("ship cannot be placed on top of another ship", () => {
+    test("horizontal ships can't overlap", () => {
+      const board = new Gameboard();
+      board.placeShip(5, 0, 0, "horizontal");
+      expect(board.ships.length).toBe(1);
+      board.placeShip(5, 0, 0, "horizontal");
+      expect(board.ships.length).toBe(1);
+    });
+
+    test("vertical ships can't overlap", () => {
+      const board = new Gameboard();
+      board.placeShip(5, 7, 0, "vertical");
+      expect(board.ships.length).toBe(1);
+      board.placeShip(5, 7, 0, "vertical");
+      expect(board.ships.length).toBe(1);
     });
   });
 });
