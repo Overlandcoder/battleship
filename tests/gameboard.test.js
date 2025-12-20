@@ -93,12 +93,26 @@ describe("ship placement", () => {
 });
 
 describe("ship attacks", () => {
-  test("ship can receive an attack", () => {
-    const board = new Gameboard();
-    board.placeShip(2, 0, 0, "horizontal");
-    const ship = board.ships[0];
-    expect(ship.hits).toBe(0);
-    board.receiveAttack(0, 0);
-    expect(ship.hits).toBe(1);
+  describe("successful attacks", () => {
+    test("ship can receive an attack", () => {
+      const board = new Gameboard();
+      board.placeShip(2, 0, 0, "horizontal");
+      const ship = board.ships[0];
+      expect(ship.hits).toBe(0);
+      board.receiveAttack(0, 0);
+      expect(ship.hits).toBe(1);
+    });
+  });
+
+  describe("missed attacks", () => {
+    test("a missed attack gets recorded and does not hit a ship", () => {
+      const board = new Gameboard();
+      board.placeShip(2, 0, 0, "horizontal");
+      const ship = board.ships[0];
+      expect(ship.hits).toBe(0);
+      board.receiveAttack(0, 1);
+      expect(ship.hits).toBe(0);
+      expect(board.missedAttacks).toContainEqual({ x: 0, y: 1 });
+    });
   });
 });

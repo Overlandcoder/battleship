@@ -5,6 +5,7 @@ class Gameboard {
     .fill(null)
     .map(() => Array(10).fill(null));
   #ships = [];
+  #missedAttacks = [];
 
   // refactor later (don't expose whole grid, replace with getSquare method)
   get grid() {
@@ -13,6 +14,10 @@ class Gameboard {
 
   get ships() {
     return this.#ships;
+  }
+
+  get missedAttacks() {
+    return this.#missedAttacks;
   }
 
   placeShip(length, x, y, direction = "horizontal") {
@@ -55,8 +60,12 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    const ship = this.grid[y][x];
-    if (ship) ship.hit();
+    const target = this.grid[y][x];
+    if (target) {
+      target.hit();
+    } else {
+      this.#missedAttacks.push({ x, y });
+    }
   }
 }
 
