@@ -21,7 +21,7 @@ class Gameboard {
   }
 
   get missedAttacks() {
-    return this.#missedAttacks;
+    return [...this.#missedAttacks];
   }
 
   placeShip(length, x, y, direction = "horizontal") {
