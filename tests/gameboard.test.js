@@ -135,3 +135,18 @@ describe("ship attacks", () => {
     });
   });
 });
+
+describe("allShipsSunk", () => {
+  test("should return true only if remaining ship is sunk", () => {
+    const board = new Gameboard();
+    board.placeShip(2, 4, 4, "vertical");
+    expect(board.allShipsSunk()).toBe(false);
+    board.receiveAttack(4, 4);
+    expect(board.allShipsSunk()).toBe(false);
+    board.receiveAttack(4, 5);
+    expect(board.allShipsSunk()).toBe(true)
+  })
+})
+
+// refactor "Arrange" (Arrange-Act-Assert) section of tests by using beforeEach
+// to remove a lot of duplication

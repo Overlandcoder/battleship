@@ -86,6 +86,10 @@ class Gameboard {
   wasAlreadyHit(x, y) {
     return this.#successfulHits.some((hit) => x === hit.x && y === hit.y);
   }
+
+  allShipsSunk() {
+    return this.#grid.flat().every((ship) => !ship || ship.isSunk);
+  }
 }
 
 export default Gameboard;
