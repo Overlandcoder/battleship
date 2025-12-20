@@ -17,7 +17,7 @@ class Gameboard {
   }
 
   get activeShipCount() {
-    return this.#ships.length;
+    return this.#ships.filter((ship) => !ship.isSunk).length;
   }
 
   get missedAttacks() {
