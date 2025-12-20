@@ -159,6 +159,11 @@ describe("allShipsSunk", () => {
     board.receiveAttack(1, 0);
     expect(board.allShipsSunk()).toBe(true);
   });
+
+  test("should return false if no ships placed", () => {
+    const board = new Gameboard();
+    expect(board.allShipsSunk()).toBe(false);
+  });
 });
 
 // refactor "Arrange" (Arrange-Act-Assert) section of tests by using beforeEach

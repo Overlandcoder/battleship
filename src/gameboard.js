@@ -88,6 +88,8 @@ class Gameboard {
   }
 
   allShipsSunk() {
+    if (this.#ships.length === 0) return false;
+
     return this.#grid.flat().every((ship) => !ship || ship.isSunk);
   }
 }
