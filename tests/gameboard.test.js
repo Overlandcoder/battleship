@@ -137,16 +137,29 @@ describe("ship attacks", () => {
 });
 
 describe("allShipsSunk", () => {
-  test("should return true only if remaining ship is sunk", () => {
+  test("should return true if 1 remaining ship is sunk", () => {
     const board = new Gameboard();
     board.placeShip(2, 4, 4, "vertical");
     expect(board.allShipsSunk()).toBe(false);
     board.receiveAttack(4, 4);
     expect(board.allShipsSunk()).toBe(false);
     board.receiveAttack(4, 5);
-    expect(board.allShipsSunk()).toBe(true)
-  })
-})
+    expect(board.allShipsSunk()).toBe(true);
+  });
+
+  test("should return true after all remaining ships are sunk", () => {
+    const board = new Gameboard();
+    board.placeShip(2, 4, 4, "vertical");
+    board.placeShip(2, 0, 0, "horizontal");
+    expect(board.allShipsSunk()).toBe(false);
+    board.receiveAttack(4, 4);
+    board.receiveAttack(4, 5);
+    expect(board.allShipsSunk()).toBe(false);
+    board.receiveAttack(0, 0);
+    board.receiveAttack(1, 0);
+    expect(board.allShipsSunk()).toBe(true);
+  });
+});
 
 // refactor "Arrange" (Arrange-Act-Assert) section of tests by using beforeEach
 // to remove a lot of duplication
