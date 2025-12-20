@@ -9,7 +9,7 @@ describe("ship placement", () => {
       const [x, y] = [2, 0];
 
       for (let i = 0; i < carrier.length; i++) {
-        expect(board.grid[y][x + i]).toBe(carrier);
+        expect(board.squareAt(x + i, y)).toBe(carrier);
       }
     });
 
@@ -18,13 +18,9 @@ describe("ship placement", () => {
       board.placeShip(5, 0, 0, "vertical");
       const carrier = board.ships[0];
       const [x, y] = [0, 0];
-      // expect(board.grid[0][0]).toBe(carrier);
-      // expect(board.grid[1][0]).toBe(carrier);
-      // expect(board.grid[2][0]).toBe(carrier);
-      // expect(board.grid[3][0]).toBe(carrier);
-      // expect(board.grid[4][0]).toBe(carrier);
+
       for (let i = 0; i < carrier.length; i++) {
-        expect(board.grid[y + i][x]).toBe(carrier);
+        expect(board.squareAt(x, y + i)).toBe(carrier);
       }
     });
   });
@@ -111,7 +107,7 @@ describe("ship attacks", () => {
       expect(ship.hits).toBe(1);
       board.receiveAttack(0, 0);
       expect(ship.hits).toBe(1);
-    })
+    });
   });
 
   describe("missed attacks", () => {
@@ -134,6 +130,6 @@ describe("ship attacks", () => {
       board.receiveAttack(0, 1);
       expect(board.missedAttacks.length).toBe(1);
       expect(ship.hits).toBe(0);
-    })
+    });
   });
 });

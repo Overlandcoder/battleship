@@ -8,9 +8,8 @@ class Gameboard {
   #missedAttacks = [];
   #successfulHits = [];
 
-  // refactor later (don't expose whole grid, replace with getSquare method)
-  get grid() {
-    return this.#grid;
+  squareAt(x, y) {
+    return this.#grid[y][x];
   }
 
   // refactor tests and remove?
@@ -58,12 +57,12 @@ class Gameboard {
   }
 
   isSquareOccupied(x, y) {
-    return this.grid[y][x] !== null;
+    return this.squareAt(x, y) !== null;
   }
 
   receiveAttack(x, y) {
     if (this.wasAlreadyAttacked(x, y)) return;
-    const target = this.grid[y][x];
+    const target = this.squareAt(x, y);
 
     if (target) {
       target.hit();
