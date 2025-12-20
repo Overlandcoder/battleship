@@ -61,11 +61,21 @@ class Gameboard {
 
   receiveAttack(x, y) {
     const target = this.grid[y][x];
+    if (this.hasBeenAttacked(x, y)) return;
+
     if (target) {
       target.hit();
     } else {
       this.#missedAttacks.push({ x, y });
     }
+  }
+
+  hasBeenAttacked(x, y) {
+    if (this.wasAlreadyMissed(x, y)) return true;
+  }
+
+  wasAlreadyMissed(x, y) {
+    return this.#missedAttacks.some((miss) => x === miss.x && y === miss.y);
   }
 }
 

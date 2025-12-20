@@ -105,7 +105,7 @@ describe("ship attacks", () => {
   });
 
   describe("missed attacks", () => {
-    test("a missed attack gets recorded and does not hit a ship", () => {
+    test("store missed attacks and prevent ships from being hit", () => {
       const board = new Gameboard();
       board.placeShip(2, 0, 0, "horizontal");
       const ship = board.ships[0];
@@ -114,5 +114,16 @@ describe("ship attacks", () => {
       expect(ship.hits).toBe(0);
       expect(board.missedAttacks).toContainEqual({ x: 0, y: 1 });
     });
+
+    test("ignore duplicate attacks on same empty squares", () => {
+      const board = new Gameboard();
+      board.placeShip(2, 0, 0, "horizontal");
+      const ship = board.ships[0];
+      board.receiveAttack(0, 1);
+      expect(board.missedAttacks.length).toBe(1);
+      board.receiveAttack(0, 1);
+      expect(board.missedAttacks.length).toBe(1);
+      expect(ship.hits).toBe(0);
+    })
   });
 });
