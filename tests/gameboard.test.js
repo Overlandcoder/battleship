@@ -102,6 +102,16 @@ describe("ship attacks", () => {
       board.receiveAttack(0, 0);
       expect(ship.hits).toBe(1);
     });
+
+    test("prevent duplicate attacks on the same ship square", () => {
+      const board = new Gameboard();
+      board.placeShip(2, 0, 0, "horizontal");
+      const ship = board.ships[0];
+      board.receiveAttack(0, 0);
+      expect(ship.hits).toBe(1);
+      board.receiveAttack(0, 0);
+      expect(ship.hits).toBe(1);
+    })
   });
 
   describe("missed attacks", () => {
@@ -115,7 +125,7 @@ describe("ship attacks", () => {
       expect(board.missedAttacks).toContainEqual({ x: 0, y: 1 });
     });
 
-    test("ignore duplicate attacks on same empty squares", () => {
+    test("prevent duplicate attacks on the same empty squares", () => {
       const board = new Gameboard();
       board.placeShip(2, 0, 0, "horizontal");
       const ship = board.ships[0];

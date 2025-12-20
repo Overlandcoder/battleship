@@ -6,12 +6,14 @@ class Gameboard {
     .map(() => Array(10).fill(null));
   #ships = [];
   #missedAttacks = [];
+  #successfulHits = [];
 
   // refactor later (don't expose whole grid, replace with getSquare method)
   get grid() {
     return this.#grid;
   }
 
+  // refactor tests and remove?
   get ships() {
     return this.#ships;
   }
@@ -60,22 +62,27 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
+    if (this.wasAlreadyAttacked(x, y)) return;
     const target = this.grid[y][x];
-    if (this.hasBeenAttacked(x, y)) return;
 
     if (target) {
       target.hit();
+      this.#successfulHits.push({ x, y });
     } else {
       this.#missedAttacks.push({ x, y });
     }
   }
 
-  hasBeenAttacked(x, y) {
-    if (this.wasAlreadyMissed(x, y)) return true;
+  wasAlreadyAttacked(x, y) {
+    return this.wasAlreadyMissed(x, y) || this.wasAlreadyHit(x, y);
   }
 
   wasAlreadyMissed(x, y) {
     return this.#missedAttacks.some((miss) => x === miss.x && y === miss.y);
+  }
+
+  wasAlreadyHit(x, y) {
+    return this.#successfulHits.some((hit) => x === hit.x && y === hit.y);
   }
 }
 
