@@ -17,6 +17,10 @@ class Gameboard {
     return this.#ships;
   }
 
+  get activeShipCount() {
+    return this.#ships.length;
+  }
+
   get missedAttacks() {
     return this.#missedAttacks;
   }

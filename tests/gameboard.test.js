@@ -5,7 +5,8 @@ describe("ship placement", () => {
     test("ship can be placed horizontally", () => {
       const board = new Gameboard();
       board.placeShip(5, 2, 0, "horizontal");
-      const carrier = board.ships[0];
+      const carrier = board.squareAt(2, 0);
+      expect(carrier).not.toBe(null);
       const [x, y] = [2, 0];
 
       for (let i = 0; i < carrier.length; i++) {
@@ -16,7 +17,8 @@ describe("ship placement", () => {
     test("ship can be placed vertically", () => {
       const board = new Gameboard();
       board.placeShip(5, 0, 0, "vertical");
-      const carrier = board.ships[0];
+      const carrier = board.squareAt(0, 0);
+      expect(carrier).not.toBe(null);
       const [x, y] = [0, 0];
 
       for (let i = 0; i < carrier.length; i++) {
@@ -29,13 +31,13 @@ describe("ship placement", () => {
     test("ship cannot be placed off the right edge", () => {
       const board = new Gameboard();
       board.placeShip(5, 6, 0, "horizontal");
-      expect(board.ships.length).toBe(0);
+      expect(board.activeShipCount).toBe(0);
     });
 
     test("ship cannot be placed off the left edge", () => {
       const board = new Gameboard();
       board.placeShip(5, -1, 0, "horizontal");
-      expect(board.ships.length).toBe(0);
+      expect(board.activeShipCount).toBe(0);
     });
   });
 
@@ -43,13 +45,13 @@ describe("ship placement", () => {
     test("ship cannot be placed off the bottom edge", () => {
       const board = new Gameboard();
       board.placeShip(5, 0, 7, "vertical");
-      expect(board.ships.length).toBe(0);
+      expect(board.activeShipCount).toBe(0);
     });
 
     test("ship cannot be placed off the top edge", () => {
       const board = new Gameboard();
       board.placeShip(5, 0, -1, "vertical");
-      expect(board.ships.length).toBe(0);
+      expect(board.activeShipCount).toBe(0);
     });
   });
 
@@ -57,33 +59,33 @@ describe("ship placement", () => {
     test("prevent full horizontal overlap", () => {
       const board = new Gameboard();
       board.placeShip(5, 0, 0, "horizontal");
-      expect(board.ships.length).toBe(1);
+      expect(board.activeShipCount).toBe(1);
       board.placeShip(5, 0, 0, "horizontal");
-      expect(board.ships.length).toBe(1);
+      expect(board.activeShipCount).toBe(1);
     });
 
     test("prevent partial horizontal overlap", () => {
       const board = new Gameboard();
       board.placeShip(5, 0, 0, "horizontal");
-      expect(board.ships.length).toBe(1);
+      expect(board.activeShipCount).toBe(1);
       board.placeShip(5, 4, 0, "horizontal");
-      expect(board.ships.length).toBe(1);
+      expect(board.activeShipCount).toBe(1);
     });
 
     test("prevent full vertical overlap", () => {
       const board = new Gameboard();
       board.placeShip(5, 7, 0, "vertical");
-      expect(board.ships.length).toBe(1);
+      expect(board.activeShipCount).toBe(1);
       board.placeShip(5, 7, 0, "vertical");
-      expect(board.ships.length).toBe(1);
+      expect(board.activeShipCount).toBe(1);
     });
 
     test("prevent partial vertical overlap", () => {
       const board = new Gameboard();
       board.placeShip(5, 7, 0, "vertical");
-      expect(board.ships.length).toBe(1);
+      expect(board.activeShipCount).toBe(1);
       board.placeShip(5, 7, 4, "vertical");
-      expect(board.ships.length).toBe(1);
+      expect(board.activeShipCount).toBe(1);
     });
   });
 });
@@ -93,7 +95,7 @@ describe("ship attacks", () => {
     test("ship can receive an attack", () => {
       const board = new Gameboard();
       board.placeShip(2, 0, 0, "horizontal");
-      const ship = board.ships[0];
+      const ship = board.squareAt(0, 0);
       expect(ship.hits).toBe(0);
       board.receiveAttack(0, 0);
       expect(ship.hits).toBe(1);
@@ -102,7 +104,7 @@ describe("ship attacks", () => {
     test("prevent duplicate attacks on the same ship square", () => {
       const board = new Gameboard();
       board.placeShip(2, 0, 0, "horizontal");
-      const ship = board.ships[0];
+      const ship = board.squareAt(0, 0);
       board.receiveAttack(0, 0);
       expect(ship.hits).toBe(1);
       board.receiveAttack(0, 0);
@@ -114,7 +116,7 @@ describe("ship attacks", () => {
     test("store missed attacks and prevent ships from being hit", () => {
       const board = new Gameboard();
       board.placeShip(2, 0, 0, "horizontal");
-      const ship = board.ships[0];
+      const ship = board.squareAt(0, 0);
       expect(ship.hits).toBe(0);
       board.receiveAttack(0, 1);
       expect(ship.hits).toBe(0);
@@ -124,7 +126,7 @@ describe("ship attacks", () => {
     test("prevent duplicate attacks on the same empty squares", () => {
       const board = new Gameboard();
       board.placeShip(2, 0, 0, "horizontal");
-      const ship = board.ships[0];
+      const ship = board.squareAt(0, 0);
       board.receiveAttack(0, 1);
       expect(board.missedAttacks.length).toBe(1);
       board.receiveAttack(0, 1);
