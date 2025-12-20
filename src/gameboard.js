@@ -12,9 +12,8 @@ class Gameboard {
     return this.#grid[y][x];
   }
 
-  // refactor tests and remove?
   get ships() {
-    return this.#ships;
+    return [...this.#ships];
   }
 
   get activeShipCount() {
