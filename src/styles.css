@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0
+}
+
+.container {
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+}
+
+.ship, .water {
+  padding: 25px;
+}
+
+.ship {
+  background-color: rgb(96, 94, 94);
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.15);
+}
+
+.water {
+  background-color: rgb(67, 216, 216);
+}
+
+.water:hover {
+  filter: brightness(0.7);
+  cursor: crosshair;
+}
