@@ -1,5 +1,5 @@
 import "./styles.css";
-import GameController from "./gameController";
+import createGameController from "./gameController";
 
-const game = GameController();
+const game = createGameController();
 game.displayBoards();

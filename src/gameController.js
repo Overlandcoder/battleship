@@ -2,7 +2,7 @@ import Gameboard from "./gameboard.js";
 import Player from "./player.js";
 import DisplayController from "./displayController.js";
 
-function GameController() {
+function createGameController() {
   const humanPlayer = new Player("player");
   const computerPlayer = new Player("computer");
 
@@ -21,4 +21,4 @@ function GameController() {
   return { displayBoards };
 }
 
-export default GameController;
+export default createGameController;
