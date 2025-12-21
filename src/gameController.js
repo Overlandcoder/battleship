@@ -1,10 +1,11 @@
 import Gameboard from "./gameboard.js";
 import Player from "./player.js";
-import DisplayController from "./displayController.js";
+import createDisplayController from "./displayController.js";
 
 function createGameController() {
   const humanPlayer = new Player("player");
   const computerPlayer = new Player("computer");
+  const display = createDisplayController();
 
   setBoards();
 
@@ -14,8 +15,8 @@ function createGameController() {
   }
 
   function displayBoards() {
-    DisplayController().displayBoard(humanPlayer.board);
-    DisplayController().displayBoard(computerPlayer.board);
+    display.displayBoard(humanPlayer.board);
+    display.displayBoard(computerPlayer.board);
   }
 
   return { displayBoards };
