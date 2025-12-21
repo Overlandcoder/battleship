@@ -1,12 +1,9 @@
 class Player {
   #board;
 
-  constructor(name) {
+  constructor(name, board) {
     this.name = name;
-  }
-
-  setBoard(board) {
-    this.#board = board;
+    this.#board = board
   }
 
   get board() {
