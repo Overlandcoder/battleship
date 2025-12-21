@@ -5,11 +5,11 @@ function createDisplayController() {
     const boardDiv = document.createElement("div");
     boardDiv.classList.add("board");
 
-    for (let row = 0; row <= 9; row++) {
+    for (let y = 0; y <= 9; y++) {
       const rowDiv = document.createElement("div");
       rowDiv.classList.add("row");
-      for (let col = 0; col <= 9; col++) {
-        const btn = createButton(board.squareAt(col, row));
+      for (let x = 0; x <= 9; x++) {
+        const btn = createButton(board.squareAt(x, y));
         rowDiv.appendChild(btn);
       }
       boardDiv.appendChild(rowDiv);
