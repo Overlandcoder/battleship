@@ -1,4 +1,4 @@
-function DisplayController() {
+function createDisplayController() {
   const container = document.querySelector(".container");
 
   function displayBoard(board) {
@@ -16,4 +16,4 @@ function DisplayController() {
   return { displayBoard };
 }
 
-export default DisplayController;
+export default createDisplayController;
