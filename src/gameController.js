@@ -28,8 +28,9 @@ function createGameController() {
   }
 
   function handleTurn(x, y) {
-    computerPlayer.board.receiveAttack(x, y);
+    const hit = computerPlayer.board.receiveAttack(x, y);
     displayBoards();
+    display.displayMessage(hit);
   }
 
   return { startGame };

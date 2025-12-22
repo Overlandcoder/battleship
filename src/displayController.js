@@ -1,5 +1,6 @@
 function createDisplayController() {
   const container = document.querySelector(".container");
+  const boardsDiv = document.querySelector(".boards");
 
   function displayBoard(board, hideShips = false) {
     const boardDiv = document.querySelector(
@@ -18,7 +19,7 @@ function createDisplayController() {
       }
       boardDiv.appendChild(rowDiv);
     }
-    container.appendChild(boardDiv);
+    boardsDiv.appendChild(boardDiv);
   }
 
   function createRow() {
@@ -55,7 +56,13 @@ function createDisplayController() {
     });
   }
 
-  return { displayBoard, addAttackListener };
+  function displayMessage(isHit) {
+    const messageLogDiv = document.querySelector(".message-log");
+    messageLogDiv.textContent = isHit ? "You hit a ship!" : "You missed";
+    container.appendChild(messageLogDiv);
+  }
+
+  return { displayBoard, addAttackListener, displayMessage };
 }
 
 export default createDisplayController;
