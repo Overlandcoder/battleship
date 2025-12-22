@@ -3,5 +3,5 @@ import createGameController from "./gameController";
 
 document.addEventListener("DOMContentLoaded", () => {
   const game = createGameController();
-  game.displayBoards();
+  game.startGame();
 });

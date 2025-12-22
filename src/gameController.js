@@ -6,8 +6,15 @@ function createGameController() {
   const humanPlayer = new Player("player", new Gameboard());
   const computerPlayer = new Player("computer", new Gameboard());
   const display = createDisplayController();
-  placeShips(humanPlayer);
-  placeShips(computerPlayer);
+
+  function startGame() {
+    placeShips(humanPlayer);
+    placeShips(computerPlayer);
+    displayBoards();
+    display.addAttackListener(
+      humanPlayer.board.receiveAttack.bind(humanPlayer.board)
+    );
+  }
 
   function placeShips(player) {
     player.board.placeShip(5, 0, 0, "horizontal");
@@ -19,10 +26,10 @@ function createGameController() {
 
   function displayBoards() {
     display.displayBoard(humanPlayer.board);
-    display.displayBoard(computerPlayer.board);
+    display.displayBoard(computerPlayer.board, true);
   }
 
-  return { displayBoards };
+  return { startGame };
 }
 
 export default createGameController;
