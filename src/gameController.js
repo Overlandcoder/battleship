@@ -29,8 +29,16 @@ function createGameController() {
 
   function handleTurn(x, y) {
     const hit = computerPlayer.board.receiveAttack(x, y);
+    const sunk = isShipSunk(x, y);
     displayBoards();
-    display.displayMessage(hit);
+    display.displayMessage(hit, sunk);
+  }
+
+  function isShipSunk(x, y) {
+    const ship = computerPlayer.board.squareAt(x, y);
+    if (!ship) return;
+
+    return ship.isSunk;
   }
 
   return { startGame };

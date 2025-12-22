@@ -56,10 +56,13 @@ function createDisplayController() {
     });
   }
 
-  function displayMessage(isHit) {
+  function displayMessage(isHit, isSunk) {
     const messageLogDiv = document.querySelector(".message-log");
-    messageLogDiv.textContent = isHit ? "You hit a ship!" : "You missed";
-    container.appendChild(messageLogDiv);
+    messageLogDiv.textContent = isSunk
+      ? "You sank a ship!"
+      : isHit
+      ? "You hit a ship!"
+      : "You missed";
   }
 
   return { displayBoard, addAttackListener, displayMessage };
