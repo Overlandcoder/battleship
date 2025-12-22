@@ -98,6 +98,10 @@ class Gameboard {
   isHit(x, y) {
     return this.#successfulHits.some((hit) => x === hit.x && y === hit.y);
   }
+
+  isMiss(x, y) {
+    return this.#missedAttacks.some((miss) => x === miss.x && y === miss.y);
+  }
 }
 
 export default Gameboard;

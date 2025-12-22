@@ -14,24 +14,40 @@
   display: flex;
 }
 
-.ship, .water, .hit {
+.ship, .water, .hit, .miss {
   padding: 25px;
 }
 
-.ship, .hit {
+.ship {
   background-color: rgb(96, 94, 94);
+}
+
+.ship, .hit {
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.15);
 }
 
-.water {
-  background-color: rgb(67, 216, 216);
+.player-board .water {
+  background-color: rgb(122, 222, 231);
 }
 
-.water:hover {
+.computer-board .water {
+  background-color: rgb(229, 223, 172);
+}
+
+.computer-board .water:hover {
   filter: brightness(0.7);
   cursor: crosshair;
 }
 
 .hit {
   background-color: brown;
+}
+
+.miss {
+  background-color: rgb(229, 223, 172);
+  filter: brightness(0.9);
+}
+
+.miss:hover {
+  cursor: not-allowed;
 }

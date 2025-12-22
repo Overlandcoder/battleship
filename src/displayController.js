@@ -6,15 +6,15 @@ function createDisplayController() {
       hideShips ? ".computer-board" : ".player-board"
     );
     boardDiv.textContent = "";
-    // boardDiv.classList.add(hideShips ? "computer-board" : "player-board");
 
     for (let y = 0; y <= 9; y++) {
       const rowDiv = document.createElement("div");
       rowDiv.classList.add("row");
       for (let x = 0; x <= 9; x++) {
+        const square = board.squareAt(x, y);
         const hit = board.isHit(x, y);
-        const btn = createButton(board.squareAt(x, y), x, y, hideShips, hit);
-        // if (board.isHit(x, y)) btn.classList.add("hit")
+        const miss = board.isMiss(x, y);
+        const btn = createButton(square, x, y, hideShips, hit, miss);
         rowDiv.appendChild(btn);
       }
       boardDiv.appendChild(rowDiv);
@@ -22,12 +22,14 @@ function createDisplayController() {
     container.appendChild(boardDiv);
   }
 
-  function createButton(square, x, y, hideShips, isHit) {
+  function createButton(square, x, y, hideShips, isHit, isMiss) {
     const btn = document.createElement("button");
     btn.dataset.x = x;
     btn.dataset.y = y;
     if (isHit) {
       btn.classList.add("hit");
+    } else if (isMiss) {
+      btn.classList.add("miss");
     } else {
       btn.classList.add(square && !hideShips ? "ship" : "water");
     }
