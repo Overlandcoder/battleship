@@ -2,14 +2,19 @@ function createDisplayController() {
   const container = document.querySelector(".container");
 
   function displayBoard(board, hideShips = false) {
-    const boardDiv = document.createElement("div");
-    boardDiv.classList.add(hideShips ? "computer-board" : "player-board");
+    const boardDiv = document.querySelector(
+      hideShips ? ".computer-board" : ".player-board"
+    );
+    boardDiv.textContent = "";
+    // boardDiv.classList.add(hideShips ? "computer-board" : "player-board");
 
     for (let y = 0; y <= 9; y++) {
       const rowDiv = document.createElement("div");
       rowDiv.classList.add("row");
       for (let x = 0; x <= 9; x++) {
-        const btn = createButton(board.squareAt(x, y), x, y, hideShips);
+        const hit = board.isHit(x, y);
+        const btn = createButton(board.squareAt(x, y), x, y, hideShips, hit);
+        // if (board.isHit(x, y)) btn.classList.add("hit")
         rowDiv.appendChild(btn);
       }
       boardDiv.appendChild(rowDiv);
@@ -17,11 +22,15 @@ function createDisplayController() {
     container.appendChild(boardDiv);
   }
 
-  function createButton(square, x, y, hideShips) {
+  function createButton(square, x, y, hideShips, isHit) {
     const btn = document.createElement("button");
     btn.dataset.x = x;
     btn.dataset.y = y;
-    btn.classList.add(square && !hideShips ? "ship" : "water");
+    if (isHit) {
+      btn.classList.add("hit");
+    } else {
+      btn.classList.add(square && !hideShips ? "ship" : "water");
+    }
     return btn;
   }
 
@@ -32,7 +41,8 @@ function createDisplayController() {
     computerBoardDiv.addEventListener("click", (event) => {
       const square = event.target;
       if (event.target.classList.contains("water")) {
-        const { x, y } = square.dataset;
+        const x = Number(square.dataset.x);
+        const y = Number(square.dataset.y);
         handleAttack(x, y);
       }
     });

@@ -11,9 +11,7 @@ function createGameController() {
     placeShips(humanPlayer);
     placeShips(computerPlayer);
     displayBoards();
-    display.addAttackListener(
-      humanPlayer.board.receiveAttack.bind(humanPlayer.board)
-    );
+    display.addAttackListener(handleTurn);
   }
 
   function placeShips(player) {
@@ -27,6 +25,11 @@ function createGameController() {
   function displayBoards() {
     display.displayBoard(humanPlayer.board);
     display.displayBoard(computerPlayer.board, true);
+  }
+
+  function handleTurn(x, y) {
+    computerPlayer.board.receiveAttack(x, y);
+    displayBoards();
   }
 
   return { startGame };

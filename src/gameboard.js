@@ -70,8 +70,10 @@ class Gameboard {
     if (target) {
       target.hit();
       this.#successfulHits.push({ x, y });
+      return true;
     } else {
       this.#missedAttacks.push({ x, y });
+      return false;
     }
   }
 
@@ -89,8 +91,12 @@ class Gameboard {
 
   allShipsSunk() {
     if (this.#ships.length === 0) return false;
-
+// refactor
     return this.#grid.flat().every((ship) => !ship || ship.isSunk);
+  }
+
+  isHit(x, y) {
+    return this.#successfulHits.some((hit) => x === hit.x && y === hit.y);
   }
 }
 

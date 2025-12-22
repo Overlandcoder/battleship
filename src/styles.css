@@ -14,11 +14,11 @@
   display: flex;
 }
 
-.ship, .water {
+.ship, .water, .hit {
   padding: 25px;
 }
 
-.ship {
+.ship, .hit {
   background-color: rgb(96, 94, 94);
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.15);
 }
@@ -30,4 +30,8 @@
 .water:hover {
   filter: brightness(0.7);
   cursor: crosshair;
+}
+
+.hit {
+  background-color: brown;
 }
