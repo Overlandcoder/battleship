@@ -8,8 +8,7 @@ function createDisplayController() {
     boardDiv.textContent = "";
 
     for (let y = 0; y <= 9; y++) {
-      const rowDiv = document.createElement("div");
-      rowDiv.classList.add("row");
+      const rowDiv = createRow();
       for (let x = 0; x <= 9; x++) {
         const square = board.squareAt(x, y);
         const hit = board.isHit(x, y);
@@ -20,6 +19,12 @@ function createDisplayController() {
       boardDiv.appendChild(rowDiv);
     }
     container.appendChild(boardDiv);
+  }
+
+  function createRow() {
+    const rowDiv = document.createElement("div");
+    rowDiv.classList.add("row");
+    return rowDiv;
   }
 
   function createButton(square, x, y, hideShips, isHit, isMiss) {
