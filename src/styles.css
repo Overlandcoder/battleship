@@ -26,7 +26,7 @@ body {
   justify-content: center;
 }
 
-.container {
+.game-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -39,23 +39,46 @@ body {
   display: flex;
   gap: 100px;
   justify-content: center;
-  opacity: 0.6;
-  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.5);
-  padding: 20px;
+  box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.3);
+  padding: 20px 30px;
   border-radius: 20px;
+}
+
+.player-board-container, .computer-board-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.board-heading {
+  display: flex;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+}
+
+.computer-board-container .board-heading {
+  color: var(--opponent-color);
+}
+
+.player-board-container .board-heading {
+  color: var(--main-color);
 }
 
 .player-board, .computer-board {
   border-radius: 30px 30px 30px 30px;
+  opacity: 0.6;
   overflow: hidden;
 }
 
 .player-board {
-  box-shadow: 0 0 80px 18px var(--main-color);
+  box-shadow: 0 10px 80px 10px var(--main-color);
 }
 
 .computer-board {
-  box-shadow: 0 0 80px 18px var(--opponent-color)
+  box-shadow: 0 10px 80px 10px var(--opponent-color)
 }
 
 .row {
@@ -119,6 +142,7 @@ body {
   font-weight: bold;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   box-shadow: 2px -2px 10px 1px var(--main-color);
+  color: var(--main-color);
 }
 
 @keyframes messagePop {

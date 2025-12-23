@@ -6,12 +6,18 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
-  <div class="container">
+  <div class="game-container">
     <div class="boards">
-      <div class="player-board"></div>
-      <div class="computer-board"></div>
+      <div class="player-board-container">
+        <h2 class="board-heading">Home Waters</h2>
+        <div class="player-board"></div>
+      </div>
+      <div class="computer-board-container">
+        <h2 class="board-heading">Hostile Waters</h2>
+        <div class="computer-board"></div>
+      </div>
     </div>
-    <div class="message-log"></div>
+    <div class="message-log">Awaiting...</div>
   </div>
 </body>
 </html>

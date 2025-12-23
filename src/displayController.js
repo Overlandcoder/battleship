@@ -1,7 +1,8 @@
 function createDisplayController() {
-  const boardsDiv = document.querySelector(".boards");
-
   function displayBoard(board, hideShips = false) {
+    const container = document.querySelector(
+      hideShips ? ".computer-board-container" : ".player-board-container"
+    );
     const boardDiv = document.querySelector(
       hideShips ? ".computer-board" : ".player-board"
     );
@@ -18,7 +19,7 @@ function createDisplayController() {
       }
       boardDiv.appendChild(rowDiv);
     }
-    boardsDiv.appendChild(boardDiv);
+    container.appendChild(boardDiv);
   }
 
   function createRow() {
