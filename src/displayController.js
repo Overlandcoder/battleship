@@ -58,11 +58,15 @@ function createDisplayController() {
 
   function displayMessage(isHit, isSunk) {
     const messageLogDiv = document.querySelector(".message-log");
-    messageLogDiv.textContent = isSunk
+    const message = isSunk
       ? "You sank a ship!"
       : isHit
       ? "You hit a ship!"
       : "You missed";
+    messageLogDiv.textContent = message;
+    messageLogDiv.classList.remove("animate-log");
+    void messageLogDiv.offsetWidth;
+    messageLogDiv.classList.add("animate-log");
   }
 
   return { displayBoard, addAttackListener, displayMessage };
