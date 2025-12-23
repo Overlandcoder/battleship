@@ -64,6 +64,8 @@ function createDisplayController() {
       ? "You hit a ship!"
       : "You missed";
     messageLogDiv.textContent = message;
+    messageLogDiv.classList.remove("highlight");
+    if (isHit || isSunk) messageLogDiv.classList.add("highlight");
     messageLogDiv.classList.remove("animate-log");
     void messageLogDiv.offsetWidth;
     messageLogDiv.classList.add("animate-log");
