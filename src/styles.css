@@ -1,3 +1,10 @@
+:root {
+  /* --main-color-rgb: 122 222 231;
+  --opponent-color-rgb: 234 228 170; */
+  --main-color: #7ae6e7;
+  --opponent-color: #efe58a;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -42,11 +49,11 @@ body {
 }
 
 .player-board {
-  box-shadow: 0 0 80px 18px rgb(122, 222, 231);
+  box-shadow: 0 0 80px 18px var(--main-color);
 }
 
 .computer-board {
-  box-shadow: 0 0 80px 18px #ebecca;
+  box-shadow: 0 0 80px 18px var(--opponent-color)
 }
 
 .row {
@@ -67,11 +74,11 @@ body {
 }
 
 .player-board .water {
-  background-color: rgb(122, 222, 231, 0.5);
+  background-color: var(--main-color);
 }
 
 .computer-board .water {
-  background-color: rgb(229, 223, 172, 0.5);
+  background-color: var(--opponent-color);
 }
 
 .computer-board .water:hover {
@@ -85,7 +92,7 @@ body {
 }
 
 .miss {
-  background-color: rgb(229, 223, 172);
+  background-color: var(--opponent-color);
   filter: brightness(0.8);
 }
 
@@ -106,8 +113,8 @@ body {
 .highlight {
   font-weight: bold;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  box-shadow: 2px -2px 10px 1px #48abe0;
-  border: 3px inset rgba(70, 221, 251, 0.8);
+  box-shadow: 2px -2px 10px 1px var(--main-color);
+  border: 3px inset var(--main-color);
 }
 
 @keyframes messagePop {
