@@ -1,5 +1,4 @@
 function createDisplayController() {
-  const container = document.querySelector(".container");
   const boardsDiv = document.querySelector(".boards");
 
   function displayBoard(board, hideShips = false) {
@@ -39,6 +38,7 @@ function createDisplayController() {
     } else {
       btn.classList.add(square && !hideShips ? "ship" : "water");
     }
+    btn.classList.add("square");
     return btn;
   }
 

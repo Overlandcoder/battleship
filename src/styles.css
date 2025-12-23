@@ -4,24 +4,51 @@
   border: 0
 }
 
+body {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+    url("./images/ship-image.jpg");
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .boards {
   display: flex;
   gap: 100px;
   justify-content: center;
+  opacity: 0.6;
+}
+
+.player-board, .computer-board {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.player-board {
+  box-shadow: 0 0 50px 15px #48abe0;
+}
+
+.computer-board {
+  box-shadow: 0 0 50px 15px #ebecca;
 }
 
 .row {
   display: flex;
 }
 
-.ship, .water, .hit, .miss {
+.square {
   padding: 25px;
+  border: 1px solid #fff;
 }
 
 .ship {
@@ -43,6 +70,7 @@
 .computer-board .water:hover {
   filter: brightness(0.7);
   cursor: crosshair;
+  border: 1px solid black;
 }
 
 .hit {
@@ -51,7 +79,7 @@
 
 .miss {
   background-color: rgb(229, 223, 172);
-  filter: brightness(0.9);
+  filter: brightness(0.8);
 }
 
 .miss:hover {
