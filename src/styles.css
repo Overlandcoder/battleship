@@ -61,8 +61,11 @@ body {
 }
 
 .square {
-  padding: 25px;
+  width: 50px;
+  height: 50px;
   border: 1px solid #fff;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 .ship {
@@ -96,7 +99,7 @@ body {
   filter: brightness(0.8);
 }
 
-.miss:hover {
+.miss:hover, .hit:hover {
   cursor: not-allowed;
 }
 

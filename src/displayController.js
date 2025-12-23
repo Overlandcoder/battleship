@@ -32,6 +32,7 @@ function createDisplayController() {
     btn.dataset.x = x;
     btn.dataset.y = y;
     if (isHit) {
+      btn.textContent = "X";
       btn.classList.add("hit");
     } else if (isMiss) {
       btn.classList.add("miss");
