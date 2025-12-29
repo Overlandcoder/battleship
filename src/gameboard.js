@@ -90,7 +90,7 @@ class Gameboard {
   }
 
   isShipSunk(x, y) {
-    const ship = squareAt(x, y);
+    const ship = this.squareAt(x, y);
     if (!ship) return;
 
     return ship.isSunk;
