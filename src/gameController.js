@@ -36,8 +36,9 @@ function createGameController() {
     setTimeout(makeComputerAttack, 1000);
   }
 
-  const switchTurn = () =>
-    currentPlayer === humanPlayer ? computerPlayer : humanPlayer;
+  function switchTurn () {
+    return currentPlayer === humanPlayer ? computerPlayer : humanPlayer;
+  }
 
   function makeComputerAttack() {
     const { x, y } = computerPlayer.generateAttack(humanPlayer.board);
