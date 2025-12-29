@@ -89,9 +89,16 @@ class Gameboard {
     return this.#successfulHits.some((hit) => x === hit.x && y === hit.y);
   }
 
+  isShipSunk(x, y) {
+    const ship = squareAt(x, y);
+    if (!ship) return;
+
+    return ship.isSunk;
+  }
+
   allShipsSunk() {
     if (this.#ships.length === 0) return false;
-// refactor
+    // refactor
     return this.#grid.flat().every((ship) => !ship || ship.isSunk);
   }
 
