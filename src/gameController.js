@@ -3,8 +3,8 @@ import Player from "./player.js";
 import createDisplayController from "./displayController.js";
 
 function createGameController() {
-  const humanPlayer = new Player("player", new Gameboard());
-  const computerPlayer = new Player("computer", new Gameboard());
+  const humanPlayer = new Player("You", new Gameboard());
+  const computerPlayer = new ComputerPlayer(new Gameboard());
   const display = createDisplayController();
 
   function startGame() {

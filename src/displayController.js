@@ -58,13 +58,13 @@ function createDisplayController() {
     });
   }
 
-  function displayMessage(isHit, isSunk) {
+  function displayMessage(isHit, isSunk, playerName) {
     const messageLogDiv = document.querySelector(".message-log");
     const message = isSunk
-      ? "You sank a ship!"
+      ? `${playerName} sank a ship!`
       : isHit
-      ? "You hit a ship!"
-      : "You missed";
+      ? `${playerName} hit a ship!`
+      : `${playerName} missed`;
     messageLogDiv.textContent = message;
     messageLogDiv.classList.remove("highlight");
     if (isHit || isSunk) messageLogDiv.classList.add("highlight");
