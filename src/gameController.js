@@ -6,6 +6,7 @@ function createGameController() {
   const humanPlayer = new Player("You", new Gameboard());
   const computerPlayer = new ComputerPlayer(new Gameboard());
   const display = createDisplayController();
+  let currentPlayer = humanPlayer;
 
   function startGame() {
     placeShips(humanPlayer);
@@ -28,15 +29,28 @@ function createGameController() {
   }
 
   function handleTurn(x, y) {
-    const hit = computerPlayer.board.receiveAttack(x, y);
-    const sunk = isShipSunk(x, y);
-    displayBoards();
-    display.displayMessage(hit, sunk);
+    if (currentPlayer === computerPlayer) return;
+
+    launchAttack(computerPlayer, x, y);
+    currentPlayer = switchTurn();
+    setTimeout(makeComputerAttack, 1000);
   }
 
-  function isShipSunk(x, y) {
-    const ship = computerPlayer.board.squareAt(x, y);
-    if (!ship) return;
+  const switchTurn = () =>
+    currentPlayer === humanPlayer ? computerPlayer : humanPlayer;
+
+  function makeComputerAttack() {
+    const { x, y } = computerPlayer.generateAttack(humanPlayer.board);
+    launchAttack(humanPlayer, x, y)
+    currentPlayer = humanPlayer;
+  }
+
+  function launchAttack(targetPlayer, x, y) {
+    const hit = targetPlayer.board.receiveAttack(x, y);
+    const sunk = targetPlayer.board.isShipSunk(x, y);
+    displayBoards();
+    display.displayMessage(hit, sunk, currentPlayer.name);
+  }
 
     return ship.isSunk;
   }
