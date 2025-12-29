@@ -12,7 +12,7 @@ function createGameController() {
     placeShips(humanPlayer);
     placeShips(computerPlayer);
     displayBoards();
-    display.addAttackListener(handleTurn);
+    display.addAttackListener(handlePlayerTurn);
   }
 
   function placeShips(player) {
@@ -28,22 +28,34 @@ function createGameController() {
     display.displayBoard(computerPlayer.board, true);
   }
 
-  function handleTurn(x, y) {
+  function handlePlayerTurn(x, y) {
     if (currentPlayer === computerPlayer) return;
 
     launchAttack(computerPlayer, x, y);
-    currentPlayer = switchTurn();
-    setTimeout(makeComputerAttack, 1000);
+    endTurn();
   }
 
-  function switchTurn () {
+  function endTurn() {
+    if (isGameOver()) {
+      display.displayWinner(currentPlayer.name);
+      return;
+    }
+
+    currentPlayer = switchTurn();
+
+    if (currentPlayer === computerPlayer) {
+      setTimeout(makeComputerAttack, 1000);
+    }
+  }
+
+  function switchTurn() {
     return currentPlayer === humanPlayer ? computerPlayer : humanPlayer;
   }
 
   function makeComputerAttack() {
     const { x, y } = computerPlayer.generateAttack(humanPlayer.board);
-    launchAttack(humanPlayer, x, y)
-    currentPlayer = humanPlayer;
+    launchAttack(humanPlayer, x, y);
+    endTurn();
   }
 
   function launchAttack(targetPlayer, x, y) {
@@ -53,7 +65,10 @@ function createGameController() {
     display.displayMessage(hit, sunk, currentPlayer.name);
   }
 
-    return ship.isSunk;
+  function isGameOver() {
+    return (
+      computerPlayer.board.allShipsSunk() || humanPlayer.board.allShipsSunk()
+    );
   }
 
   return { startGame };
