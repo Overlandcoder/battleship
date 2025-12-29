@@ -73,7 +73,12 @@ function createDisplayController() {
     messageLogDiv.classList.add("animate-log");
   }
 
-  return { displayBoard, addAttackListener, displayMessage };
+  function displayWinner(winnerName) {
+    const messageLogDiv = document.querySelector(".message-log");
+    messageLogDiv.textContent = `${winnerName.toUpperCase()} WON!`;
+  }
+
+  return { displayBoard, addAttackListener, displayMessage, displayWinner };
 }
 
 export default createDisplayController;
