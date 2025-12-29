@@ -3,7 +3,7 @@ class Player {
 
   constructor(name, board) {
     this.name = name;
-    this.#board = board
+    this.#board = board;
   }
 
   get board() {
@@ -11,4 +11,20 @@ class Player {
   }
 }
 
-export default Player
+class ComputerPlayer extends Player {
+  constructor(board) {
+    super("Computer", board);
+  }
+
+  generateAttack(opponentBoard) {
+    let x, y;
+
+    do {
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * 10);
+      return { x, y };
+    } while (opponentBoard.wasAlreadyAttacked(x, y));
+  }
+}
+
+export { ComputerPlayer, Player };
