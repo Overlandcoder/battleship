@@ -1,5 +1,5 @@
 import Gameboard from "./gameboard.js";
-import Player from "./player.js";
+import { ComputerPlayer, Player } from "./player.js";
 import createDisplayController from "./displayController.js";
 
 function createGameController() {
