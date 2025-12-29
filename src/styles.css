@@ -130,7 +130,7 @@ body {
 .message-log {
   min-height: 1.5rem;
   font-size: 1.7rem;
-  padding: 10px 50px;
+  padding: 10px 30px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 40px 0px 40px 40px;
   color: white;
@@ -144,11 +144,21 @@ body {
   color: var(--main-color);
 }
 
+.animate-log {
+  animation: messagePop 0.3s ease-out forwards;
+}
+
+.message-log p {
+  will-change: transform;
+  animation: slideBackAndForth 1.5s infinite ease-in-out alternate;
+}
+
 @keyframes messagePop {
   0% { opacity: 0; transform: translateY(-2px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-.animate-log {
-  animation: messagePop 0.3s ease-out forwards;
+@keyframes slideBackAndForth {
+  0% { translate: 0 0; }
+  100% { translate: 10% 0; }
 }
