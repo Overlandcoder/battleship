@@ -22,8 +22,9 @@ class ComputerPlayer extends Player {
     do {
       x = Math.floor(Math.random() * 10);
       y = Math.floor(Math.random() * 10);
-      return { x, y };
     } while (opponentBoard.wasAlreadyAttacked(x, y));
+
+    return { x, y };
   }
 }
 
