@@ -45,10 +45,10 @@ function createDisplayController() {
   }
 
   function addAttackListener(handleAttack) {
-    const computerBoardDiv = document.querySelector(".computer-board");
-    if (!computerBoardDiv) return;
+    const container = document.querySelector(".computer-board-container");
+    if (!container) return;
 
-    computerBoardDiv.addEventListener("click", (event) => {
+    container.addEventListener("click", (event) => {
       const square = event.target;
       if (event.target.classList.contains("water")) {
         const x = Number(square.dataset.x);
