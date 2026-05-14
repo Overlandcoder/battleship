@@ -27,8 +27,8 @@ class Gameboard {
   placeShip(length, x, y, direction = "horizontal") {
     const dir = direction.toLowerCase();
 
-    if (!this.isValidDirection(dir)) return;
-    if (!this.isWithinBounds(length, x, y, dir)) return;
+    if (!this.isValidDirection(dir)) return false;
+    if (!this.isWithinBounds(length, x, y, dir)) return false;
     const coords = [];
 
     for (let i = 0; i < length; i++) {
@@ -37,10 +37,12 @@ class Gameboard {
         : coords.push({ x: x + i, y: y });
     }
 
-    if (coords.some(({ x, y }) => this.isSquareOccupied(x, y))) return;
+    if (coords.some(({ x, y }) => this.isSquareOccupied(x, y))) return false;
     const ship = new Ship(length);
     coords.forEach(({ x, y }) => (this.#grid[y][x] = ship));
     this.#ships.push(ship);
+
+    return true;
   }
 
   isWithinBounds(length, x, y, direction) {

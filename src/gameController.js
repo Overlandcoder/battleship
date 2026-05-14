@@ -9,18 +9,40 @@ function createGameController() {
   let currentPlayer = humanPlayer;
 
   function startGame() {
-    placeShips(humanPlayer);
-    placeShips(computerPlayer);
+    display.addPlacementChoiceListener(handlePlacementChoice);
+  }
+
+  function handlePlacementChoice(choice) {
+    if (choice === "Random") {
+      console.log(choice);
+      placeShipsRandomly(humanPlayer);
+    }
+
+    placeShipsRandomly(computerPlayer);
     displayBoards();
     display.addAttackListener(handlePlayerTurn);
   }
 
-  function placeShips(player) {
-    player.board.placeShip(5, 0, 0, "horizontal");
-    player.board.placeShip(4, 2, 2, "horizontal");
-    player.board.placeShip(3, 4, 4, "vertical");
-    player.board.placeShip(3, 6, 6, "horizontal");
-    player.board.placeShip(2, 6, 8, "vertical");
+  function placeShipsRandomly(player) {
+    const shipLengths = [2, 3, 3, 4, 5];
+    const directions = ["horizontal", "vertical"];
+
+    shipLengths.forEach((length) => {
+      let shipPlaced = false;
+
+      while (!shipPlaced) {
+        const randomX = Math.floor(Math.random() * 10);
+        const randomY = Math.floor(Math.random() * 10);
+        const randomDirection = directions[Math.floor(Math.random() * 2)];
+
+        shipPlaced = player.board.placeShip(
+          length,
+          randomX,
+          randomY,
+          randomDirection
+        );
+      }
+    });
   }
 
   function displayBoards() {

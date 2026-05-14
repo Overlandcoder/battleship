@@ -8,7 +8,8 @@
 * {
   margin: 0;
   padding: 0;
-  border: 0
+  border: 0;
+  font-family: sans-serif;
 }
 
 html {
@@ -16,14 +17,17 @@ html {
 }
 
 body {
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
     url("./images/ship-image-blurred.jpg");
   min-height: 100vh;
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;
+}
+
+h2 {
+  font-size: 2rem;
 }
 
 .game-container {
@@ -35,8 +39,46 @@ body {
   gap: 50px;
 }
 
-.boards {
+.placement-choices {
+  margin-top: 25px;
+  color: #104e4f;
+  text-shadow: 1px 1px 8px white;
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px 40px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.choice-btns {
+  margin-top: 30px;
   display: flex;
+  justify-content: center;
+  gap: 80px;
+}
+
+.choice-btns button {
+  padding: 10px 25px;
+  border-radius: 5px;
+  background-color: #efe58a;
+  font-size: 1.2rem;
+  color: rgb(51, 51, 51);
+  font-weight: bold;
+  cursor: pointer;
+  transition: border 0.2s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+.choice-btns button:hover {
+  border: 2px solid #104e4f;
+}
+
+button:active {
+  scale: 0.95;
+}
+
+.boards {
+  display: none;
   gap: 100px;
   justify-content: center;
   box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.3);
@@ -44,7 +86,8 @@ body {
   border-radius: 20px;
 }
 
-.player-board-container, .computer-board-container {
+.player-board-container,
+.computer-board-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -67,7 +110,8 @@ body {
   color: var(--main-color);
 }
 
-.player-board, .computer-board {
+.player-board,
+.computer-board {
   border-radius: 30px 30px 30px 30px;
   opacity: 0.7;
   overflow: hidden;
@@ -78,7 +122,7 @@ body {
 }
 
 .computer-board {
-  box-shadow: 0 10px 80px 10px var(--opponent-color)
+  box-shadow: 0 10px 80px 10px var(--opponent-color);
 }
 
 .row {
@@ -93,11 +137,16 @@ body {
   font-weight: bold;
 }
 
+.square:active {
+  scale: 1.15;
+}
+
 .ship {
   background-color: #104e4f;
 }
 
-.ship, .hit {
+.ship,
+.hit {
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.65);
 }
 
@@ -123,13 +172,14 @@ body {
   background-color: #a29a50;
 }
 
-.miss:hover, .hit:hover {
+.miss:hover,
+.hit:hover {
   cursor: not-allowed;
 }
 
 .message-log {
   min-height: 1.5rem;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   padding: 10px 30px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 40px 0px 40px 40px;
@@ -154,11 +204,21 @@ body {
 }
 
 @keyframes messagePop {
-  0% { opacity: 0; transform: translateY(-2px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideBackAndForth {
-  0% { translate: 0 0; }
-  100% { translate: 10% 0; }
+  0% {
+    translate: 0 0;
+  }
+  100% {
+    translate: 10% 0;
+  }
 }

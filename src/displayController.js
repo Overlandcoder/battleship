@@ -1,6 +1,8 @@
 function createDisplayController() {
   function displayBoard(board, hideShips = false) {
-    const container = document.querySelector(
+    const boardsContainer = document.querySelector(".boards");
+    boardsContainer.style.display = "flex";
+    const boardContainer = document.querySelector(
       hideShips ? ".computer-board-container" : ".player-board-container"
     );
     const boardDiv = document.querySelector(
@@ -19,7 +21,7 @@ function createDisplayController() {
       }
       boardDiv.appendChild(rowDiv);
     }
-    container.appendChild(boardDiv);
+    boardContainer.appendChild(boardDiv);
   }
 
   function createRow() {
@@ -42,6 +44,16 @@ function createDisplayController() {
     }
     btn.classList.add("square");
     return btn;
+  }
+
+  function addPlacementChoiceListener(onPlacementSelection) {
+    const container = document.querySelector(".placement-choices");
+
+    container.addEventListener("click", (event) => {
+      const placementChoice = event.target.textContent;
+      container.style.display = "none";
+      onPlacementSelection(placementChoice);
+    });
   }
 
   function addAttackListener(handleAttack) {
@@ -78,7 +90,13 @@ function createDisplayController() {
     messageLogDiv.textContent = `${winnerName.toUpperCase()} WON!`;
   }
 
-  return { displayBoard, addAttackListener, displayMessage, displayWinner };
+  return {
+    addPlacementChoiceListener,
+    displayBoard,
+    addAttackListener,
+    displayMessage,
+    displayWinner,
+  };
 }
 
 export default createDisplayController;
