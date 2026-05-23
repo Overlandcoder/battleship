@@ -53,6 +53,8 @@ function createDisplayController() {
 
     container.addEventListener("click", (event) => {
       const placementChoice = event.target.textContent;
+      if (placementChoice !== "Random" && placementChoice !== "Manual") return;
+
       container.style.display = "none";
       onPlacementSelection(placementChoice);
     });
