@@ -40,13 +40,13 @@ h2 {
 }
 
 .ship-placement {
-  margin-top: 25px;
-  color: #104e4f;
-  text-shadow: 1px 1px 8px white;
-  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.3);
-  padding: 30px 40px;
+  margin: 25px 0;
+  color: rgb(243, 243, 243);
+  padding: 50px 40px;
+  border: 1px solid rgba(126, 126, 126, 0.253);
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.5);
 }
 
 .placement-choices {
@@ -65,14 +65,23 @@ h2 {
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.15s ease;
   border: 2px solid transparent;
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
 }
 
-.placement-choices button:hover,
+.placement-choices button {
+  background-color: #31b84e;
+}
+
+.placement-choices button:hover {
+  background-color: #33db57;
+  scale: 1.05;
+}
+
 .ship-choices button:hover {
   background-color: #31b84e;
+  scale: 1.035;
 }
 
 button:active {
@@ -94,6 +103,12 @@ button:active {
   flex-direction: column;
   justify-content: center;
   gap: 25px;
+}
+
+.ship-choices .active-choice {
+  background-color: #31b84e;
+  color: white;
+  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.5);
 }
 
 .boards {
@@ -222,11 +237,6 @@ button:active {
 .message-log p {
   will-change: transform;
   animation: slideBackAndForth 1.5s infinite ease-in-out alternate;
-}
-
-.ship-choices .active-choice {
-  background-color: #31b84e;
-  color: white;
 }
 
 @keyframes messagePop {
