@@ -195,7 +195,9 @@ button:active {
 }
 
 .computer-board .water:hover {
-  filter: brightness(0.7);
+  background-color: #f9401b;
+  border-radius: 15px;
+  border: 5px solid rgb(166, 7, 7);
   cursor: crosshair;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
 }
