@@ -39,7 +39,7 @@ h2 {
   gap: 50px;
 }
 
-.placement-choices {
+.ship-placement {
   margin-top: 25px;
   color: #104e4f;
   text-shadow: 1px 1px 8px white;
@@ -49,14 +49,15 @@ h2 {
   background-color: rgba(255, 255, 255, 0.15);
 }
 
-.choice-btns {
+.placement-choices {
   margin-top: 30px;
   display: flex;
   justify-content: center;
   gap: 80px;
 }
 
-.choice-btns button {
+.placement-choices button,
+.ship-choices button {
   padding: 10px 25px;
   border-radius: 5px;
   background-color: #efe58a;
@@ -69,12 +70,20 @@ h2 {
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
 }
 
-.choice-btns button:hover {
+.placement-choices button:hover,
+.ship-choices button:hover {
   border: 2px solid #104e4f;
 }
 
 button:active {
   scale: 0.95;
+}
+
+.ship-choices {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 }
 
 .boards {
@@ -141,11 +150,13 @@ button:active {
   scale: 1.15;
 }
 
-.ship {
+.ship,
+.temp-ship {
   background-color: #104e4f;
 }
 
 .ship,
+.temp-ship,
 .hit {
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.65);
 }

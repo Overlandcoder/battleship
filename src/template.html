@@ -7,17 +7,24 @@
 </head>
 <body>
   <div class="game-container">
-    <div class="placement-choices">
+    <div class="ship-placement">
       <h2>Choose your ship placement</h2>
-      <div class="choice-btns">
+      <div class="placement-choices">
         <button>Random</button>
-        <!-- <button>Manual</button> -->
+        <button>Manual</button>
       </div>
     </div>
     <div class="boards">
       <div class="player-board-container">
         <h2 class="board-heading">Home Waters</h2>
         <div class="player-board"></div>
+      </div>
+      <div class="ship-choices">
+        <button data-length="5">Carrier</button>
+        <button data-length="4">Battleship</button>
+        <button data-length="3">Cruiser</button>
+        <button data-length="3">Submarine</button>
+        <button data-length="2">Destroyer</button>
       </div>
       <div class="computer-board-container">
         <h2 class="board-heading">Hostile Waters</h2>

@@ -14,12 +14,14 @@ function createGameController() {
 
   function handlePlacementChoice(choice) {
     if (choice === "Random") {
-      console.log(choice);
       placeShipsRandomly(humanPlayer);
+    } else if (choice === "Manual") {
+      placeShipsManually();
     }
 
     placeShipsRandomly(computerPlayer);
-    displayBoards();
+    display.displayBoard(humanPlayer.board);
+    display.displayBoard(computerPlayer.board, true);
     display.addAttackListener(handlePlayerTurn);
   }
 
@@ -45,9 +47,13 @@ function createGameController() {
     });
   }
 
-  function displayBoards() {
+  function placeShipsManually() {
     display.displayBoard(humanPlayer.board);
-    display.displayBoard(computerPlayer.board, true);
+    display.displayShipChoices();
+    display.addShipChoicesListener();
+    display.addHoverListener(
+      humanPlayer.board.canBePlaced.bind(humanPlayer.board)
+    );
   }
 
   function handlePlayerTurn(x, y) {
@@ -83,7 +89,8 @@ function createGameController() {
   function launchAttack(targetPlayer, x, y) {
     const hit = targetPlayer.board.receiveAttack(x, y);
     const sunk = targetPlayer.board.isShipSunk(x, y);
-    displayBoards();
+    display.displayBoard(humanPlayer.board);
+    display.displayBoard(computerPlayer.board, true);
     display.displayMessage(hit, sunk, currentPlayer.name);
   }
 

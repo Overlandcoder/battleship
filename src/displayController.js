@@ -1,4 +1,6 @@
 function createDisplayController() {
+  let chosenShipLength = null;
+
   function displayBoard(board, hideShips = false) {
     const boardsContainer = document.querySelector(".boards");
     boardsContainer.style.display = "flex";
@@ -47,13 +49,82 @@ function createDisplayController() {
   }
 
   function addPlacementChoiceListener(onPlacementSelection) {
-    const container = document.querySelector(".placement-choices");
+    const container = document.querySelector(".ship-placement");
 
     container.addEventListener("click", (event) => {
       const placementChoice = event.target.textContent;
       container.style.display = "none";
       onPlacementSelection(placementChoice);
     });
+  }
+
+  function displayShipChoices() {
+    const boardContainer = document.querySelector(".computer-board-container");
+    boardContainer.style.display = "none";
+    const container = document.querySelector(".ship-choices");
+    container.style.display = "flex";
+  }
+
+  function addShipChoicesListener() {
+    const shipChoices = document.querySelector(".ship-choices");
+
+    shipChoices.addEventListener("click", (event) => {
+      chosenShipLength = parseInt(event.target.dataset.length);
+    });
+  }
+
+  function addHoverListener(canBePlaced) {
+    const boardDiv = document.querySelector(".player-board");
+    boardDiv.addEventListener("mouseover", (event) => {
+      removeOldHighlights();
+      const x = parseInt(event.target.dataset.x);
+      const y = parseInt(event.target.dataset.y);
+      const coords = createShipCoordinates(chosenShipLength, x, y);
+
+      if (!canBePlaced(chosenShipLength, x, y, "horizontal")) {
+        event.target.style.cursor = "not-allowed";
+
+        return;
+      }
+
+      event.target.style.cursor = "pointer";
+      coords.forEach((coord) => toggleSquareHighlight(coord, true));
+    });
+  }
+
+  function removeOldHighlights() {
+    const highlightedSquares = document.querySelectorAll(
+      ".player-board .temp-ship"
+    );
+    highlightedSquares.forEach((square) => {
+      const x = square.dataset.x;
+      const y = square.dataset.y;
+      toggleSquareHighlight({ x, y }, false);
+    });
+  }
+
+  function createShipCoordinates(length, x, y) {
+    const coords = [];
+
+    // for (let i = 0; i < length; i++) {
+    //   direction === "vertical"
+    //     ? coords.push({ x: x, y: y + i })
+    //     : coords.push({ x: x + i, y: y });
+    // }
+
+    for (let i = 0; i < length; i++) {
+      coords.push({ x: x + i, y: y });
+    }
+
+    return coords;
+  }
+
+  function toggleSquareHighlight({ x, y }, highlight) {
+    const square = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    if (!square) return;
+
+    square.classList.toggle("temp-ship", highlight);
+    square.classList.toggle("water", !highlight);
   }
 
   function addAttackListener(handleAttack) {
@@ -92,6 +163,9 @@ function createDisplayController() {
 
   return {
     addPlacementChoiceListener,
+    addShipChoicesListener,
+    addHoverListener,
+    displayShipChoices,
     displayBoard,
     addAttackListener,
     displayMessage,
