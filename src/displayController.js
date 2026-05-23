@@ -61,7 +61,7 @@ function createDisplayController() {
   function displayShipChoices() {
     const boardContainer = document.querySelector(".computer-board-container");
     boardContainer.style.display = "none";
-    const container = document.querySelector(".ship-choices");
+    const container = document.querySelector(".manual-placement");
     container.style.display = "flex";
   }
 
@@ -69,8 +69,16 @@ function createDisplayController() {
     const shipChoices = document.querySelector(".ship-choices");
 
     shipChoices.addEventListener("click", (event) => {
+      if (event.target.tagName !== "BUTTON") return;
       chosenShipLength = parseInt(event.target.dataset.length);
+      highlightShipChoice(event.target);
     });
+  }
+
+  function highlightShipChoice(shipChoice) {
+    const previousChoice = document.querySelector(".active-choice");
+    previousChoice?.classList.remove("active-choice");
+    shipChoice.classList.add("active-choice");
   }
 
   function addHoverListener(canBePlaced) {
