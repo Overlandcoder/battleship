@@ -79,7 +79,7 @@ h2 {
   scale: 1.05;
 }
 
-.ship-choices button:hover {
+.ship-choice:hover {
   background-color: #31b84e;
   scale: 1.035;
 }

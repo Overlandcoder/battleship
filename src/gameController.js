@@ -54,6 +54,10 @@ function createGameController() {
     display.addHoverListener(
       humanPlayer.board.canBePlaced.bind(humanPlayer.board)
     );
+    display.addShipPlacedListener(
+      humanPlayer.board.placeShip.bind(humanPlayer.board),
+      humanPlayer.board
+    );
   }
 
   function handlePlayerTurn(x, y) {

@@ -40,6 +40,8 @@ class Gameboard {
   }
 
   canBePlaced(length, x, y, direction) {
+    if (!length || typeof length !== "number") return false;
+
     const dir = direction.toLowerCase();
 
     if (!this.isValidDirection(dir)) return false;

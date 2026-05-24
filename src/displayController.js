@@ -78,9 +78,13 @@ function createDisplayController() {
   }
 
   function highlightShipChoice(shipChoice) {
+    removeShipChoiceHighlight();
+    shipChoice.classList.add("active-choice");
+  }
+
+  function removeShipChoiceHighlight() {
     const previousChoice = document.querySelector(".active-choice");
     previousChoice?.classList.remove("active-choice");
-    shipChoice.classList.add("active-choice");
   }
 
   function addHoverListener(canBePlaced) {
@@ -137,6 +141,35 @@ function createDisplayController() {
     square.classList.toggle("water", !highlight);
   }
 
+  function addShipPlacedListener(onShipPlaced, board) {
+    const boardDiv = document.querySelector(".player-board");
+
+    boardDiv.addEventListener("click", (event) => {
+      const x = parseInt(event.target.dataset.x);
+      const y = parseInt(event.target.dataset.y);
+      let shipPlaced = onShipPlaced(chosenShipLength, x, y, "horizontal");
+
+      if (shipPlaced) {
+        const shipPlacedButton = document.querySelector(".active-choice");
+        disableButton(shipPlacedButton);
+        removeShipChoiceHighlight();
+        chosenShipLength = null;
+        shipPlaced = false;
+      }
+
+      displayBoard(board);
+    });
+  }
+
+  function disableButton(button) {
+    button.disabled = true;
+    button.classList.remove("ship-choice");
+    button.style.cursor = "not-allowed";
+    button.style.textDecoration = "line-through";
+    button.style.textDecorationColor = "red";
+    button.style.textDecorationThickness = "3px";
+  }
+
   function addAttackListener(handleAttack) {
     const container = document.querySelector(".computer-board-container");
     if (!container) return;
@@ -175,6 +208,7 @@ function createDisplayController() {
     addPlacementChoiceListener,
     addShipChoicesListener,
     addHoverListener,
+    addShipPlacedListener,
     displayShipChoices,
     displayBoard,
     addAttackListener,
