@@ -60,11 +60,19 @@ function createDisplayController() {
     });
   }
 
-  function displayShipChoices() {
-    const boardContainer = document.querySelector(".computer-board-container");
-    boardContainer.style.display = "none";
+  function toggleShipChoices() {
     const container = document.querySelector(".manual-placement");
-    container.style.display = "flex";
+    toggleDisplay(container);
+  }
+
+  function toggleComputerBoard() {
+    const boardContainer = document.querySelector(".computer-board-container");
+    toggleDisplay(boardContainer);
+  }
+
+  function toggleDisplay(element) {
+    const currentDisplay = window.getComputedStyle(element).display;
+    element.style.display = currentDisplay === "none" ? "flex" : "none";
   }
 
   function addShipChoicesListener() {
@@ -141,7 +149,14 @@ function createDisplayController() {
     square.classList.toggle("water", !highlight);
   }
 
-  function addShipPlacedListener(onShipPlaced, board) {
+  function addShipPlacedListener(
+    onShipPlaced,
+    playerBoard,
+    computerBoard,
+    shipCount
+  ) {
+    if (!chosenShipLength) return;
+
     const boardDiv = document.querySelector(".player-board");
 
     boardDiv.addEventListener("click", (event) => {
@@ -157,7 +172,12 @@ function createDisplayController() {
         shipPlaced = false;
       }
 
-      displayBoard(board);
+      displayBoard(playerBoard);
+
+      if (shipCount() === 5) {
+        toggleShipChoices();
+        toggleComputerBoard();
+      }
     });
   }
 
@@ -205,11 +225,12 @@ function createDisplayController() {
   }
 
   return {
+    toggleComputerBoard,
     addPlacementChoiceListener,
     addShipChoicesListener,
     addHoverListener,
     addShipPlacedListener,
-    displayShipChoices,
+    toggleShipChoices,
     displayBoard,
     addAttackListener,
     displayMessage,

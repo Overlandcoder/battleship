@@ -49,14 +49,17 @@ function createGameController() {
 
   function placeShipsManually() {
     display.displayBoard(humanPlayer.board);
-    display.displayShipChoices();
+    display.toggleShipChoices();
+    display.toggleComputerBoard();
     display.addShipChoicesListener();
     display.addHoverListener(
       humanPlayer.board.canBePlaced.bind(humanPlayer.board)
     );
     display.addShipPlacedListener(
       humanPlayer.board.placeShip.bind(humanPlayer.board),
-      humanPlayer.board
+      humanPlayer.board,
+      computerPlayer.board,
+      () => humanPlayer.board.activeShipCount
     );
   }
 
