@@ -55,10 +55,10 @@ function createGameController() {
     display.addHoverListener(
       humanPlayer.board.canBePlaced.bind(humanPlayer.board)
     );
+    display.addRotationListener();
     display.addShipPlacedListener(
       humanPlayer.board.placeShip.bind(humanPlayer.board),
       humanPlayer.board,
-      computerPlayer.board,
       () => humanPlayer.board.activeShipCount
     );
   }

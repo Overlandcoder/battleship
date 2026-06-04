@@ -30,6 +30,10 @@ h2 {
   font-size: 2rem;
 }
 
+h3 {
+  font-size: 1.5rem;
+}
+
 .game-container {
   width: 100%;
   display: flex;
@@ -91,14 +95,20 @@ button:active {
 .manual-placement {
   display: none;
   flex-direction: column;
+  gap: 50px;
 }
 
 .manual-placement h2 {
-  color: white;
+  color: rgb(239, 239, 239);
+}
+
+.manual-placement h3 {
+  color: rgb(230, 230, 230);
+  text-align: center;
 }
 
 .ship-choices {
-  margin-top: 80px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;

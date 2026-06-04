@@ -1,5 +1,6 @@
 function createDisplayController() {
   let chosenShipLength = null;
+  let direction = "horizontal";
 
   function displayBoard(board, hideShips = false) {
     const boardsContainer = document.querySelector(".boards");
@@ -103,7 +104,7 @@ function createDisplayController() {
       const y = parseInt(event.target.dataset.y);
       const coords = createShipCoordinates(chosenShipLength, x, y);
 
-      if (!canBePlaced(chosenShipLength, x, y, "horizontal")) {
+      if (!canBePlaced(chosenShipLength, x, y, direction)) {
         event.target.style.cursor = "not-allowed";
 
         return;
@@ -128,14 +129,10 @@ function createDisplayController() {
   function createShipCoordinates(length, x, y) {
     const coords = [];
 
-    // for (let i = 0; i < length; i++) {
-    //   direction === "vertical"
-    //     ? coords.push({ x: x, y: y + i })
-    //     : coords.push({ x: x + i, y: y });
-    // }
-
     for (let i = 0; i < length; i++) {
-      coords.push({ x: x + i, y: y });
+      direction === "vertical"
+        ? coords.push({ x: x, y: y + i })
+        : coords.push({ x: x + i, y: y });
     }
 
     return coords;
@@ -149,20 +146,15 @@ function createDisplayController() {
     square.classList.toggle("water", !highlight);
   }
 
-  function addShipPlacedListener(
-    onShipPlaced,
-    playerBoard,
-    computerBoard,
-    shipCount
-  ) {
-    if (!chosenShipLength) return;
-
+  function addShipPlacedListener(onShipPlaced, playerBoard, shipCount) {
     const boardDiv = document.querySelector(".player-board");
 
     boardDiv.addEventListener("click", (event) => {
+      if (!chosenShipLength) return;
+
       const x = parseInt(event.target.dataset.x);
       const y = parseInt(event.target.dataset.y);
-      let shipPlaced = onShipPlaced(chosenShipLength, x, y, "horizontal");
+      let shipPlaced = onShipPlaced(chosenShipLength, x, y, direction);
 
       if (shipPlaced) {
         const shipPlacedButton = document.querySelector(".active-choice");
@@ -188,6 +180,21 @@ function createDisplayController() {
     button.style.textDecoration = "line-through";
     button.style.textDecorationColor = "red";
     button.style.textDecorationThickness = "3px";
+  }
+
+  function addRotationListener() {
+    window.addEventListener("keydown", (event) => {
+      if (event.key.toLowerCase() === "r") {
+        direction = direction === "horizontal" ? "vertical" : "horizontal";
+        const hoveredSquare = document.querySelector(".square:hover");
+
+        if (hoveredSquare) {
+          hoveredSquare.dispatchEvent(
+            new MouseEvent("mouseover", { bubbles: true })
+          );
+        }
+      }
+    });
   }
 
   function addAttackListener(handleAttack) {
@@ -229,6 +236,7 @@ function createDisplayController() {
     addPlacementChoiceListener,
     addShipChoicesListener,
     addHoverListener,
+    addRotationListener,
     addShipPlacedListener,
     toggleShipChoices,
     displayBoard,
